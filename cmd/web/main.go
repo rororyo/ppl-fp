@@ -1,9 +1,9 @@
 package main
 
 import (
-	"blessing-be/internal/config"
-	"blessing-be/pkg/timezone"
 	"fmt"
+	"fp-designpattern/internal/config"
+	"fp-designpattern/pkg/timezone"
 )
 
 func main() {

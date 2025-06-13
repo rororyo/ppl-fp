@@ -1,4 +1,4 @@
-module blessing-be
+module fp-designpattern
 
 go 1.24.0
 
