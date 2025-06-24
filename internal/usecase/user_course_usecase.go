@@ -1,12 +1,12 @@
 package usecase
 
 import (
-	"blessing-be/internal/entity"
-	"blessing-be/internal/model"
-	"blessing-be/internal/model/converter"
-	"blessing-be/internal/repository"
-	"blessing-be/pkg/timezone"
 	"context"
+	"fp-designpattern/internal/entity"
+	"fp-designpattern/internal/model"
+	"fp-designpattern/internal/model/converter"
+	"fp-designpattern/internal/repository"
+	"fp-designpattern/pkg/timezone"
 	"time"
 
 	"github.com/go-playground/validator"

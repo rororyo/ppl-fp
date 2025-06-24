@@ -1,12 +1,12 @@
 package usecase
 
 import (
-	"blessing-be/internal/entity"
-	"blessing-be/internal/model"
-	"blessing-be/internal/model/converter"
-	"blessing-be/internal/repository"
 	"context"
 	"encoding/json"
+	"fp-designpattern/internal/entity"
+	"fp-designpattern/internal/model"
+	"fp-designpattern/internal/model/converter"
+	"fp-designpattern/internal/repository"
 	"mime/multipart"
 
 	"github.com/go-playground/validator"
@@ -22,10 +22,10 @@ type CourseUsecase struct {
 	Validate          *validator.Validate
 	CourseRepository  *repository.CourseRepository
 	SubjectRepository *repository.SubjectRepository
-	FileRepository    *repository.GCSFileRepository
+	FileRepository    *repository.LocalFileRepository
 }
 
-func NewCourseUsecase(db *gorm.DB, log *logrus.Logger, validate *validator.Validate, courseRepository *repository.CourseRepository, subjectRepository *repository.SubjectRepository, fileRepository *repository.GCSFileRepository) *CourseUsecase {
+func NewCourseUsecase(db *gorm.DB, log *logrus.Logger, validate *validator.Validate, courseRepository *repository.CourseRepository, subjectRepository *repository.SubjectRepository, fileRepository *repository.LocalFileRepository) *CourseUsecase {
 	return &CourseUsecase{
 		DB:                db,
 		Log:               log,

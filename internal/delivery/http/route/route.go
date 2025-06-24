@@ -8,11 +8,12 @@ import (
 )
 
 type RouteConfig struct {
-	App               *fiber.App
-	UserController    *http.UserController
-	SubjectController *http.SubjectController
-	CourseController  *http.CourseController
-	AuthMiddleware    fiber.Handler
+	App                  *fiber.App
+	UserController       *http.UserController
+	SubjectController    *http.SubjectController
+	CourseController     *http.CourseController
+	UserCourseController *http.UserCourseController
+	AuthMiddleware       fiber.Handler
 }
 
 func (c *RouteConfig) Setup() {
@@ -38,6 +39,10 @@ func (c *RouteConfig) SetupAuthRoute() {
 	c.App.Post("/api/users/logout", c.UserController.Logout)
 	c.App.Put("api/users", c.UserController.Update)
 
+	// accessable courses
+	c.App.Get("/api/courses", c.UserCourseController.ListAccessable)
+	c.App.Get("/api/courses/:id", c.UserCourseController.Get)
+
 	// Admin-only
 	adminOnly := c.App.Group("/api/admin", middleware.RequireRole("admin"))
 	// users
@@ -50,6 +55,16 @@ func (c *RouteConfig) SetupAuthRoute() {
 	adminOnly.Delete("/subjects/:id", c.SubjectController.Delete)
 
 	// courses
+	adminOnly.Get("/courses", c.CourseController.List)
+	adminOnly.Get("/courses/:id", c.CourseController.Get)
+	adminOnly.Post("/courses/upload", c.CourseController.UploadFile)
 	adminOnly.Post("/courses", c.CourseController.Create)
+	adminOnly.Put("/courses/:id", c.CourseController.Update)
+	adminOnly.Delete("/courses/:id", c.CourseController.Delete)
+
+	// course permissions
+	adminOnly.Get("/user-courses", c.UserCourseController.List)
+	adminOnly.Post("/user-courses", c.UserCourseController.Create)
+	adminOnly.Delete("/user-courses/:id", c.UserCourseController.Delete)
 
 }

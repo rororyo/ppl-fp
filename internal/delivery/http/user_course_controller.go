@@ -1,9 +1,9 @@
 package http
 
 import (
-	"blessing-be/internal/delivery/http/middleware"
-	"blessing-be/internal/model"
-	"blessing-be/internal/usecase"
+	"fp-designpattern/internal/delivery/http/middleware"
+	"fp-designpattern/internal/model"
+	"fp-designpattern/internal/usecase"
 	"math"
 
 	"github.com/gofiber/fiber/v2"

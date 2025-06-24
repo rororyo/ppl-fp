@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"blessing-be/internal/entity"
-	"blessing-be/internal/model"
+	"fp-designpattern/internal/entity"
+	"fp-designpattern/internal/model"
 )
 
 func UserCourseToResponse(userCourse *entity.UserCourse) *model.UserCourseResponse {
