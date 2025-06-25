@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"fp-designpattern/internal/model"
 	"fp-designpattern/internal/usecase"
+	"fp-designpattern/pkg/timezone"
 	"math"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
@@ -117,7 +119,13 @@ func (c *CourseController) UploadFile(ctx *fiber.Ctx) error {
 	}
 	defer file.Close()
 
-	objectPath := fmt.Sprintf("courses/%s", fileHeader.Filename)
+	now := time.Now().In(timezone.WIB)
+	timestampPrefix := now.Format("20060102_150405")
+
+	fileName := fmt.Sprintf("%s_%s", timestampPrefix, fileHeader.Filename)
+
+	// Upload to folder "courses/"
+	objectPath := fmt.Sprintf("courses/%s", fileName)
 
 	url, err := c.Usecase.UploadFile(
 		ctx.UserContext(),
@@ -130,5 +138,6 @@ func (c *CourseController) UploadFile(ctx *fiber.Ctx) error {
 		return fiber.ErrInternalServerError
 	}
 
+	// Return public URL
 	return ctx.JSON(model.WebResponse[string]{Data: url})
 }

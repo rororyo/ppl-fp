@@ -9,8 +9,8 @@ import (
 )
 
 type LocalFileRepository struct {
-	BasePath string // Example: "./public/images/courses"
-	BaseURL  string // Example: "/images/courses"
+	BasePath string
+	BaseURL  string
 }
 
 func NewLocalFileRepository(basePath, baseURL string) *LocalFileRepository {

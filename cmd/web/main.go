@@ -7,11 +7,12 @@ import (
 )
 
 func main() {
+	app := config.NewFiber(config.NewViper())
+	app.Static("/images", "./public/images")
 	viperConfig := config.NewViper()
 	log := config.NewLogger(viperConfig)
 	db := config.NewDatabase(viperConfig, log)
 	validate := config.NewValidator(viperConfig)
-	app := config.NewFiber(viperConfig)
 	timezone.InitTimeLocation()
 	config.Bootstrap(&config.BootstrapConfig{
 		DB:       db,
@@ -20,6 +21,7 @@ func main() {
 		Validate: validate,
 		Config:   viperConfig,
 	})
+
 	webPort := viperConfig.GetInt("web.port")
 	err := app.Listen(fmt.Sprintf(":%d", webPort))
 	if err != nil {

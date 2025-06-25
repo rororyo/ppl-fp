@@ -27,8 +27,8 @@ func Bootstrap(config *BootstrapConfig) {
 	userRepository := repository.NewUserRepository(config.Log)
 	subjectRepository := repository.NewSubjectRepository(config.Log)
 	fileRepository := repository.NewLocalFileRepository(
-		"./public/images/courses",
-		"/images/courses",
+		"./public/images",
+		"/images",
 	)
 	courseRepository := repository.NewCourseRepository(config.Log)
 	userCourseRepository := repository.NewUserCourseRepository(config.Log)
